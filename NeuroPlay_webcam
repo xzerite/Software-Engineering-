@@ -4,16 +4,16 @@ import cv2
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print("Failed to open the camera.")
+    print("❌ Failed to open the camera.")
     exit()
 
-print("Camera started successfully. Press 'Q' to quit.")
+print("✅ Camera started successfully. Press 'Q' to quit.")
 
 while True:
     # Read each frame from the webcam
     ret, frame = cap.read()
     if not ret:
-        print("Failed to capture frame.")
+        print("⚠️ Failed to capture frame.")
         break
 
     # Display the live video feed
@@ -21,9 +21,10 @@ while True:
 
     # Press 'Q' to exit the webcam window
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        print("Exiting the camera...")
+        print("🛑 Exiting the camera...")
         break
 
 # Release the camera and close all windows
 cap.release()
 cv2.destroyAllWindows()
+
