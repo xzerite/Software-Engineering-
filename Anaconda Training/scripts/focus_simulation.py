@@ -1,0 +1,63 @@
+import cv2
+import random
+import numpy as np
+
+# Open the webcam (0 = built-in camera)
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)   # HD width
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)   # HD height
+
+if not cap.isOpened():
+    print("❌ Failed to open the camera.")
+    exit()
+
+print("✅ NeuroPlay Lite Pro v2 started. Press 'Q' to quit.")
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("⚠️ Failed to capture frame.")
+        break
+
+    # Simulated focus level (50% - 100%)
+    focus_level = random.randint(50, 100)
+
+    # Choose color based on focus level
+    if focus_level < 65:
+        color = (0, 0, 255)      # Red = low focus
+    elif focus_level < 80:
+        color = (0, 255, 255)    # Yellow = medium focus
+    else:
+        color = (0, 255, 0)      # Green = high focus
+
+    # Apply darkness effect based on focus
+    darkness = max(0, 80 - focus_level) / 100.0
+    overlay = frame.copy()
+    frame = cv2.addWeighted(overlay, 1 - darkness, np.zeros_like(frame), darkness, 0)
+
+    # Display focus level text
+    cv2.putText(frame, f"Focus Level: {focus_level}%", (30, 60),
+                cv2.FONT_HERSHEY_SIMPLEX, 1.2, color, 3)
+
+    # Draw dynamic focus bar
+    bar_x, bar_y = 30, 100
+    bar_width = int(focus_level * 5)
+    cv2.rectangle(frame, (bar_x, bar_y), (bar_x + 500, bar_y + 30), (50, 50, 50), 2)
+    cv2.rectangle(frame, (bar_x, bar_y), (bar_x + bar_width, bar_y + 30), color, -1)
+
+    # Motivational message if focus is too low
+    if focus_level < 60:
+        cv2.putText(frame, "⚠️ Focus! Stay alert!", (300, 400),
+                    cv2.FONT_HERSHEY_DUPLEX, 1.1, (0, 0, 255), 3)
+
+    # Show the video feed
+    cv2.imshow("🧠 NeuroPlay Lite Pro v2 - Dynamic Focus", frame)
+
+    # Exit on 'Q'
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        print("🛑 Exiting NeuroPlay Lite Pro v2...")
+        break
+
+# Release camera and close windows
+cap.release()
+cv2.destroyAllWindows()

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPlay Live Focus</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #fff;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+        }
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #00ffc3;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h2 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .hero-content a {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 30px;
+            background: #00ffc3;
+            color: #000;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .hero-content a:hover {
+            background: #00d8a3;
+        }
+
+        /* Video Section */
+        .video-section {
+            text-align: center;
+            padding: 50px;
+        }
+        .video-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #00ffc3;
+        }
+        .video-section img {
+            border: 3px solid #00ffc3;
+            border-radius: 10px;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #00ffc3;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            flex: 0 0 30%;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+        }
+        .feature-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #00ffc3;
+        }
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0,0,0,0.5);
+            padding: 40px 50px;
+            text-align: center;
+        }
+        footer p {
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media(max-width: 900px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            .feature-card {
+                flex: 0 0 80%;
+            }
+            .hero-content h2 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <h1>NeuroPlay</h1>
+    <nav>
+        <a href="#video">Live Focus</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Next-Level Brain Gaming</h2>
+        <p>Experience the future of gaming with focus-based interaction and immersive visuals.</p>
+        <a href="#video">See Live Focus</a>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section" id="video">
+    <h2>Live Focus & Gameplay</h2>
+    <p>The focus bar and moving object are displayed live from your webcam.</p>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+</section>
+
+<!-- Features Section -->
+<section id="features">
+    <h2>Key Features</h2>
+    <div class="features">
+        <div class="feature-card">
+            <i class="fas fa-brain"></i>
+            <h3>Focus Detection</h3>
+            <p>Track player concentration in real-time and adapt the gameplay dynamically.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-gamepad"></i>
+            <h3>Adaptive Gameplay</h3>
+            <p>Challenge players according to their focus levels for a truly personalized experience.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Performance Analytics</h3>
+            <p>Visualize session trends with beautiful charts and actionable insights.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <h2>About NeuroPlay</h2>
+    <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto;">
+        NeuroPlay is a next-generation gaming interface that merges neuroscience and interactive gaming. 
+        Our platform monitors focus and adapts gameplay in real-time, providing both fun and cognitive training.
+    </p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 NeuroPlay Project. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
